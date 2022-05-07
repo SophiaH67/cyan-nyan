@@ -47,11 +47,11 @@ app.get("/:messageId", (req, res) => {
   let text = "";
   // Author Name: message content
   bot.messageMap[messageId].forEach((message) => {
-    text += `${message.member?.nickname || message.author.username}: ${
+    text += ` ${message.member?.nickname || message.author.username}: ${
       message.content
     }\n`;
   });
-  res.send(text);
+  res.send(text.trim());
 });
 
 app.post("/", async (req, res) => {
