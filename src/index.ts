@@ -44,7 +44,14 @@ app.get("/:messageId", (req, res) => {
     res.status(404).send("Not found");
     return;
   }
-  res.send(bot.messageMap[messageId]);
+  let text = "";
+  // Author Name: message content
+  bot.messageMap[messageId].forEach((message) => {
+    text += `${message.member?.nickname || message.author.username}: ${
+      message.content
+    }\n`;
+  });
+  res.send(text);
 });
 
 app.post("/", async (req, res) => {
